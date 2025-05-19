@@ -161,11 +161,9 @@ module "subnetwork" {
   private_ip_google_access  = true
   compute_network           = module.network.network_self_link
 }
+```
 
-
-## GKE Cluster and Node Pool Modules
-
-### google_gke_cluster
+### 10. google_gke_cluster
 
 Reusable module for creating a GKE cluster.
 
@@ -192,7 +190,7 @@ module "gke_cluster" {
 - `endpoint`
 - `master_version`
 
-### google_gke_nodepool
+### 11. google_gke_nodepool
 
 Reusable module for creating a GKE node pool.
 
@@ -223,36 +221,6 @@ module "gke_nodepool" {
 **Outputs:**
 - `nodepool_id`
 - `instance_group_urls`
-
-## Root Module Example
-
-```hcl
-provider "google" {
-  project = var.project_id
-  region  = var.region
-}
-
-module "gke_cluster" {
-  source     = "./google_gke_cluster"
-  name       = var.cluster_name
-  location   = var.region
-  project_id = var.project_id
-  network    = var.network
-  subnetwork = var.subnetwork
-}
-
-module "gke_nodepool" {
-  source       = "./google_gke_nodepool"
-  name         = var.nodepool_name
-  location     = var.region
-  project_id   = var.project_id
-  cluster      = module.gke_cluster.cluster_id
-  node_count   = var.node_count
-  machine_type = var.machine_type
-  labels       = var.node_labels
-  preemptible  = var.preemptible
-}
-```
 
 ---
 
