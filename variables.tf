@@ -13,10 +13,20 @@ variable "network" {
   description = "VPC network name"
   type        = string
 }
-variable "subnetwork" {
-  description = "Subnetwork name"
-  type        = string
+#variable "subnetwork" {
+#  description = "Subnetwork name"
+#  type        = string
+#}
+variable "public_subnet_name" {
+  description = "Public subnet name"
+  type = string 
 }
+
+variable "private_subnet_name" {
+  description = "Private Subnet name"
+  type = string 
+}
+
 variable "auto_create_subnetworks" {
   description = "Auto create subnetworks"
   type        = bool
@@ -27,9 +37,17 @@ variable "routing_mode" {
 }
 
 # Subnetwork
-variable "subnet_cidr_range" {
-  description = "CIDR range for subnet"
-  type        = string
+#variable "subnet_cidr_range" {
+#  description = "CIDR range for subnet"
+#  type        = string
+#}
+variable "public_subnet_cidr" {
+  description = "CIDR range for Public subnet"
+  type = string 
+}
+variable "private_subnet_cidr" {
+  description = "CIDR range for private subnet"  
+  type = string
 }
 variable "private_ip_google_access" {
   description = "Enable private Google access"
