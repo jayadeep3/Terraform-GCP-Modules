@@ -64,3 +64,10 @@ variable "instance_public_disk_size" {}
 variable "instance_public_disk_type" {}
 variable "instance_public_disk_auto_delete" {}
 variable "instance_public_provisioning_model" {}
+
+variable "cluster_name" { default = "my-gke-cluster" }
+variable "nodepool_name" { default = "primary-node-pool" }
+variable "node_count" { default = 1 }
+variable "machine_type" { default = "e2-medium" }
+variable "node_labels" { default = {} }
+variable "preemptible" { default = false }
