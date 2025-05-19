@@ -64,3 +64,15 @@ instance_public_disk_size           = 10
 instance_public_disk_type           = "pd-balanced"
 instance_public_disk_auto_delete    = true
 instance_public_provisioning_model  = "STANDARD"
+
+# GKE Cluster
+cluster_name      = "my-gke-cluster"
+
+# GKE Nodepool
+nodepool_name     = "primary-node-pool"
+node_count        = 3
+machine_type      = "e2-medium"
+node_labels       = {
+  "env" = "dev"
+}
+preemptible       = false
