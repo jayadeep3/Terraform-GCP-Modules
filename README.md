@@ -33,12 +33,14 @@ module "attached_disk" {
 ```
 
 **Inputs:**
+
 - `disk_id` (string): ID of the disk to attach
 - `compute_instance_id` (string): ID of the instance to attach to
 - `instance_zone` (string): Zone of the instance
 
 **Outputs:**
-- (add any outputs if available)
+
+- attached_disk_id
 
 ---
 
@@ -60,6 +62,7 @@ module "compute_disk" {
 ```
 
 **Inputs:**
+
 - `name` (string): Name of the disk
 - `type` (string): Disk type (e.g., pd-standard)
 - `zone` (string): Zone for the disk
@@ -68,7 +71,8 @@ module "compute_disk" {
 - `labels` (map): Labels for the disk
 
 **Outputs:**
-- (add any outputs if available)
+
+- disk_id
 
 ---
 
@@ -90,6 +94,7 @@ module "firewall" {
 ```
 
 **Inputs:**
+
 - `name` (string): Firewall rule name
 - `compute_network_name` (string): Network name
 - `protocol` (string): Protocol (e.g., tcp)
@@ -98,7 +103,8 @@ module "firewall" {
 - `target_tags` (list): List of target tags
 
 **Outputs:**
-- (add any outputs if available)
+
+- firewall_id
 
 ---
 
@@ -109,27 +115,28 @@ Reusable module for creating a private Compute Engine instance.
 **Usage:**
 ```hcl
 module "private_instance" {
-  source               = "./google_compute_instance_private"
-  name                 = var.name
-  machine_type         = var.machine_type
-  zone                 = var.zone
-  deletion_protection  = var.deletion_protection
-  tags                 = var.tags
-  disk_auto_delete     = var.disk_auto_delete
-  size                 = var.size
-  image                = var.image
-  type                 = var.type
-  labels               = var.labels
-  compute_network_name = var.compute_network_name
-  subnet_name          = var.subnet_name
-  provisioning_model   = var.provisioning_model
-  metadata             = var.metadata
-  firewall_name        = var.firewall_name
+  source                = "./google_compute_instance_private"
+  name                  = var.name
+  machine_type          = var.machine_type
+  zone                  = var.zone
+  deletion_protection   = var.deletion_protection
+  tags                  = var.tags
+  disk_auto_delete      = var.disk_auto_delete
+  size                  = var.size
+  image                 = var.image
+  type                  = var.type
+  labels                = var.labels
+  compute_network_name  = var.compute_network_name
+  subnet_name           = var.subnet_name
+  provisioning_model    = var.provisioning_model
+  metadata              = var.metadata
+  firewall_name         = var.firewall_name
   service_account_email = var.service_account_email
 }
 ```
 
 **Inputs:**
+
 - `name` (string): Instance name
 - `machine_type` (string): Machine type
 - `zone` (string): Zone
@@ -148,7 +155,8 @@ module "private_instance" {
 - `service_account_email` (string): Service account email
 
 **Outputs:**
-- (add any outputs if available)
+
+- private_instance_id
 
 ---
 
@@ -159,16 +167,33 @@ Reusable module for creating a public Compute Engine instance.
 **Usage:**
 ```hcl
 module "public_instance" {
-  source               = "./google_compute_instance_public"
-  (same variables as private, plus any public-specific ones)
+  source                = "./google_compute_instance_public"
+  name                  = var.name
+  machine_type          = var.machine_type
+  zone                  = var.zone
+  deletion_protection   = var.deletion_protection
+  tags                  = var.tags
+  disk_auto_delete      = var.disk_auto_delete
+  size                  = var.size
+  image                 = var.image
+  type                  = var.type
+  labels                = var.labels
+  compute_network_name  = var.compute_network_name
+  subnet_name           = var.subnet_name
+  provisioning_model    = var.provisioning_model
+  metadata              = var.metadata
+  firewall_name         = var.firewall_name
+  service_account_email = var.service_account_email
 }
 ```
 
 **Inputs:**
-- (copy from private, add any public-specific ones)
+
+- same as `google_compute_instance_private`
 
 **Outputs:**
-- (add any outputs if available)
+
+- public_instance_id
 
 ---
 
@@ -188,13 +213,15 @@ module "network" {
 ```
 
 **Inputs:**
-- `project_id` (string)
-- `name` (string)
-- `auto_create_subnetworks` (bool)
-- `routing_mode` (string)
+
+- `project_id` (string): Project ID
+- `name` (string): Network name
+- `auto_create_subnetworks` (bool): Auto-create subnetworks
+- `routing_mode` (string): Routing mode
 
 **Outputs:**
-- (add any outputs if available)
+
+- network_id
 
 ---
 
@@ -215,6 +242,7 @@ module "router" {
 ```
 
 **Inputs:**
+
 - `project_id` (string)
 - `compute_router_name` (string)
 - `compute_network_name` (string)
@@ -222,7 +250,8 @@ module "router" {
 - `compute_network` (string)
 
 **Outputs:**
-- (add any outputs if available)
+
+- router_id
 
 ---
 
@@ -244,6 +273,7 @@ module "router_nat" {
 ```
 
 **Inputs:**
+
 - `name` (string)
 - `compute_router_name` (string)
 - `region` (string)
@@ -252,7 +282,8 @@ module "router_nat" {
 - `subnet_id` (string)
 
 **Outputs:**
-- (add any outputs if available)
+
+- nat_id
 
 ---
 
@@ -275,6 +306,7 @@ module "subnetwork" {
 ```
 
 **Inputs:**
+
 - `project_id` (string)
 - `name` (string)
 - `subnet_cidr_range` (string)
@@ -284,7 +316,8 @@ module "subnetwork" {
 - `compute_network` (string)
 
 **Outputs:**
-- (add any outputs if available)
+
+- subnetwork_id
 
 ---
 
@@ -305,6 +338,7 @@ module "gke_cluster" {
 ```
 
 **Inputs:**
+
 - `name` (string): Cluster name
 - `location` (string): GCP region or zone
 - `project_id` (string): GCP project ID
@@ -312,9 +346,10 @@ module "gke_cluster" {
 - `subnetwork` (string): Subnetwork name
 
 **Outputs:**
-- `cluster_id`
-- `endpoint`
-- `master_version`
+
+- cluster_id
+- endpoint
+- master_version
 
 ---
 
@@ -338,6 +373,7 @@ module "gke_nodepool" {
 ```
 
 **Inputs:**
+
 - `name` (string): Node pool name
 - `location` (string): Region or zone
 - `project_id` (string): GCP project ID
@@ -348,8 +384,9 @@ module "gke_nodepool" {
 - `preemptible` (bool): Use preemptible VMs
 
 **Outputs:**
-- `nodepool_id`
-- `instance_group_urls`
+
+- nodepool_id
+- instance_group_urls
 
 ---
 
