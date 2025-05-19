@@ -31,6 +31,9 @@ output "gke_cluster_id" {
 output "gke_cluster_endpoint" {
   value = module.gke_cluster.endpoint
 }
+output "gke_cluster_master_version" {
+  value = module.gke_cluster.master_version
+}
 output "gke_nodepool_id" {
   value = module.gke_nodepool.nodepool_id
 }
