@@ -40,7 +40,7 @@ module "attached_disk" {
 
 **Outputs:**
 
-- attached_disk_id
+- `attached_disk_id`
 
 ---
 
@@ -72,7 +72,7 @@ module "compute_disk" {
 
 **Outputs:**
 
-- disk_id
+- `disk_id`
 
 ---
 
@@ -104,7 +104,7 @@ module "firewall" {
 
 **Outputs:**
 
-- firewall_id
+- `firewall_id`
 
 ---
 
@@ -156,7 +156,7 @@ module "private_instance" {
 
 **Outputs:**
 
-- private_instance_id
+- `private_instance_id`
 
 ---
 
@@ -193,7 +193,7 @@ module "public_instance" {
 
 **Outputs:**
 
-- public_instance_id
+- `public_instance_id`
 
 ---
 
@@ -221,7 +221,7 @@ module "network" {
 
 **Outputs:**
 
-- network_id
+- `network_id`
 
 ---
 
@@ -251,7 +251,7 @@ module "router" {
 
 **Outputs:**
 
-- router_id
+- `router_id`
 
 ---
 
@@ -283,7 +283,7 @@ module "router_nat" {
 
 **Outputs:**
 
-- nat_id
+- `nat_id`
 
 ---
 
@@ -317,7 +317,7 @@ module "subnetwork" {
 
 **Outputs:**
 
-- subnetwork_id
+- `subnetwork_id`
 
 ---
 
@@ -347,9 +347,9 @@ module "gke_cluster" {
 
 **Outputs:**
 
-- cluster_id
-- endpoint
-- master_version
+- `cluster_id`
+- `endpoint`
+- `master_version`
 
 ---
 
@@ -385,8 +385,8 @@ module "gke_nodepool" {
 
 **Outputs:**
 
-- nodepool_id
-- instance_group_urls
+- `nodepool_id`
+- `instance_group_urls`
 
 ---
 
