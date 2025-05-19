@@ -117,3 +117,24 @@ module "instance_public" {
   subnet_name          = var.subnetwork_name
   provisioning_model   = var.instance_public_provisioning_model
 }
+
+module "gke_cluster" {
+  source    = "./google_gke_cluster"
+  name      = var.cluster_name
+  location  = var.region
+  project_id = var.project_id
+  network   = var.network
+  subnetwork = var.subnetwork
+}
+
+module "gke_nodepool" {
+  source      = "./google_gke_nodepool"
+  name        = var.nodepool_name
+  location    = var.region
+  project_id  = var.project_id
+  cluster     = module.gke_cluster.cluster_id
+  node_count  = var.node_count
+  machine_type = var.machine_type
+  labels      = var.node_labels
+  preemptible = var.preemptible
+}
