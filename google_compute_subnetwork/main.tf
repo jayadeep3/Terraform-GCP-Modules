@@ -5,5 +5,5 @@ resource "google_compute_subnetwork" "subnet" {
   region                   = var.region
   network                  = var.compute_network_name
   private_ip_google_access = var.private_ip_google_access
-  depends_on               = [var.compute_network]
+  depends_on               = [google_compute_network.vpc-network]
 }
