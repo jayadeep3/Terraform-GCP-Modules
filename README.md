@@ -18,150 +18,275 @@ This repository contains reusable Terraform modules for Google Cloud Platform (G
 
 ---
 
-## Usage
-
-Each module is located in its own directory. Below are examples of how to use each module in your Terraform configuration.
-
 ### 1. google_compute_attached_disk
 
+Reusable module for attaching a disk to a Compute Engine instance.
+
+**Usage:**
 ```hcl
 module "attached_disk" {
-  source           = "./google_compute_attached_disk"
-  disk_id          = "your-disk-id"
-  compute_instance_id = "your-instance-id"
-  instance_zone    = "us-central1-a"
+  source              = "./google_compute_attached_disk"
+  disk_id             = var.disk_id
+  compute_instance_id = var.compute_instance_id
+  instance_zone       = var.instance_zone
 }
 ```
+
+**Inputs:**
+- `disk_id` (string): ID of the disk to attach
+- `compute_instance_id` (string): ID of the instance to attach to
+- `instance_zone` (string): Zone of the instance
+
+**Outputs:**
+- (add any outputs if available)
+
+---
 
 ### 2. google_compute_disk
 
+Reusable module for creating a Compute Engine disk.
+
+**Usage:**
 ```hcl
 module "compute_disk" {
   source   = "./google_compute_disk"
-  name     = "my-disk"
-  type     = "pd-standard"
-  zone     = "us-central1-a"
-  image    = "debian-11-bullseye-v20220118"
-  size     = 100
-  labels   = {}
+  name     = var.name
+  type     = var.type
+  zone     = var.zone
+  image    = var.image
+  size     = var.size
+  labels   = var.labels
 }
 ```
+
+**Inputs:**
+- `name` (string): Name of the disk
+- `type` (string): Disk type (e.g., pd-standard)
+- `zone` (string): Zone for the disk
+- `image` (string): Image to create the disk from
+- `size` (number): Size in GB
+- `labels` (map): Labels for the disk
+
+**Outputs:**
+- (add any outputs if available)
+
+---
 
 ### 3. google_compute_firewall
 
+Reusable module for creating a firewall rule.
+
+**Usage:**
 ```hcl
 module "firewall" {
-  source             = "./google_compute_firewall"
-  name               = "allow-http"
-  compute_network_name = "my-network"
-  protocol           = "tcp"
-  ports              = ["80"]
-  source_ranges      = ["0.0.0.0/0"]
-  target_tags        = ["http-server"]
+  source                = "./google_compute_firewall"
+  name                  = var.name
+  compute_network_name  = var.compute_network_name
+  protocol              = var.protocol
+  ports                 = var.ports
+  source_ranges         = var.source_ranges
+  target_tags           = var.target_tags
 }
 ```
+
+**Inputs:**
+- `name` (string): Firewall rule name
+- `compute_network_name` (string): Network name
+- `protocol` (string): Protocol (e.g., tcp)
+- `ports` (list): List of allowed ports
+- `source_ranges` (list): List of source ranges
+- `target_tags` (list): List of target tags
+
+**Outputs:**
+- (add any outputs if available)
+
+---
 
 ### 4. google_compute_instance_private
 
+Reusable module for creating a private Compute Engine instance.
+
+**Usage:**
 ```hcl
 module "private_instance" {
   source               = "./google_compute_instance_private"
-  name                 = "private-vm"
-  machine_type         = "e2-medium"
-  zone                 = "us-central1-a"
-  deletion_protection  = false
-  tags                 = ["private"]
-  disk_auto_delete     = true
-  size                 = 100
-  image                = "debian-11"
-  type                 = "pd-standard"
-  labels               = {}
-  compute_network_name = "my-network"
-  subnet_name          = "my-subnet"
-  provisioning_model   = "STANDARD"
-  metadata             = {}
-  firewall_name        = "allow-internal"
-  service_account_email = "your-service-account@project.iam.gserviceaccount.com"
+  name                 = var.name
+  machine_type         = var.machine_type
+  zone                 = var.zone
+  deletion_protection  = var.deletion_protection
+  tags                 = var.tags
+  disk_auto_delete     = var.disk_auto_delete
+  size                 = var.size
+  image                = var.image
+  type                 = var.type
+  labels               = var.labels
+  compute_network_name = var.compute_network_name
+  subnet_name          = var.subnet_name
+  provisioning_model   = var.provisioning_model
+  metadata             = var.metadata
+  firewall_name        = var.firewall_name
+  service_account_email = var.service_account_email
 }
 ```
+
+**Inputs:**
+- `name` (string): Instance name
+- `machine_type` (string): Machine type
+- `zone` (string): Zone
+- `deletion_protection` (bool): Enable deletion protection
+- `tags` (list): Network tags
+- `disk_auto_delete` (bool): Auto-delete boot disk
+- `size` (number): Disk size
+- `image` (string): Disk image
+- `type` (string): Disk type
+- `labels` (map): Labels
+- `compute_network_name` (string): Network to attach
+- `subnet_name` (string): Subnet to attach
+- `provisioning_model` (string): Provisioning model
+- `metadata` (map): Metadata
+- `firewall_name` (string): Firewall rule
+- `service_account_email` (string): Service account email
+
+**Outputs:**
+- (add any outputs if available)
+
+---
 
 ### 5. google_compute_instance_public
 
+Reusable module for creating a public Compute Engine instance.
+
+**Usage:**
 ```hcl
 module "public_instance" {
   source               = "./google_compute_instance_public"
-  name                 = "public-vm"
-  machine_type         = "e2-medium"
-  zone                 = "us-central1-a"
-  deletion_protection  = false
-  tags                 = ["public"]
-  disk_auto_delete     = true
-  size                 = 100
-  image                = "debian-11"
-  type                 = "pd-standard"
-  labels               = {}
-  compute_network_name = "my-network"
-  subnet_name          = "my-subnet"
-  provisioning_model   = "STANDARD"
-  metadata             = {}
-  firewall_name        = "allow-http"
-  service_account_email = "your-service-account@project.iam.gserviceaccount.com"
+  (same variables as private, plus any public-specific ones)
 }
 ```
+
+**Inputs:**
+- (copy from private, add any public-specific ones)
+
+**Outputs:**
+- (add any outputs if available)
+
+---
 
 ### 6. google_compute_network
 
+Reusable module for creating a VPC network.
+
+**Usage:**
 ```hcl
 module "network" {
   source                  = "./google_compute_network"
-  project_id              = "your-gcp-project-id"
-  name                    = "my-network"
-  auto_create_subnetworks = false
-  routing_mode            = "REGIONAL"
+  project_id              = var.project_id
+  name                    = var.name
+  auto_create_subnetworks = var.auto_create_subnetworks
+  routing_mode            = var.routing_mode
 }
 ```
+
+**Inputs:**
+- `project_id` (string)
+- `name` (string)
+- `auto_create_subnetworks` (bool)
+- `routing_mode` (string)
+
+**Outputs:**
+- (add any outputs if available)
+
+---
 
 ### 7. google_compute_router
 
+Reusable module for creating a Cloud Router.
+
+**Usage:**
 ```hcl
 module "router" {
   source                = "./google_compute_router"
-  project_id            = "your-gcp-project-id"
-  compute_router_name   = "my-router"
-  compute_network_name  = "my-network"
-  region                = "us-central1"
-  compute_network       = module.network.network_self_link
+  project_id            = var.project_id
+  compute_router_name   = var.compute_router_name
+  compute_network_name  = var.compute_network_name
+  region                = var.region
+  compute_network       = var.compute_network
 }
 ```
+
+**Inputs:**
+- `project_id` (string)
+- `compute_router_name` (string)
+- `compute_network_name` (string)
+- `region` (string)
+- `compute_network` (string)
+
+**Outputs:**
+- (add any outputs if available)
+
+---
 
 ### 8. google_compute_router_nat
 
+Reusable module for creating a Cloud NAT attached to a router.
+
+**Usage:**
 ```hcl
 module "router_nat" {
   source                           = "./google_compute_router_nat"
-  name                             = "my-nat"
-  compute_router_name              = "my-router"
-  region                           = "us-central1"
-  nat_ip_allocate_option           = "AUTO_ONLY"
-  source_subnetwork_ip_ranges_to_nat = "ALL_SUBNETWORKS_ALL_IP_RANGES"
-  subnet_id                        = "my-subnet"
+  name                             = var.name
+  compute_router_name              = var.compute_router_name
+  region                           = var.region
+  nat_ip_allocate_option           = var.nat_ip_allocate_option
+  source_subnetwork_ip_ranges_to_nat = var.source_subnetwork_ip_ranges_to_nat
+  subnet_id                        = var.subnet_id
 }
 ```
+
+**Inputs:**
+- `name` (string)
+- `compute_router_name` (string)
+- `region` (string)
+- `nat_ip_allocate_option` (string)
+- `source_subnetwork_ip_ranges_to_nat` (string)
+- `subnet_id` (string)
+
+**Outputs:**
+- (add any outputs if available)
+
+---
 
 ### 9. google_compute_subnetwork
 
+Reusable module for creating a subnet.
+
+**Usage:**
 ```hcl
 module "subnetwork" {
   source                    = "./google_compute_subnetwork"
-  project_id                = "your-gcp-project-id"
-  name                      = "my-subnet"
-  subnet_cidr_range         = "10.0.1.0/24"
-  region                    = "us-central1"
-  compute_network_name      = "my-network"
-  private_ip_google_access  = true
-  compute_network           = module.network.network_self_link
+  project_id                = var.project_id
+  name                      = var.name
+  subnet_cidr_range         = var.subnet_cidr_range
+  region                    = var.region
+  compute_network_name      = var.compute_network_name
+  private_ip_google_access  = var.private_ip_google_access
+  compute_network           = var.compute_network
 }
 ```
+
+**Inputs:**
+- `project_id` (string)
+- `name` (string)
+- `subnet_cidr_range` (string)
+- `region` (string)
+- `compute_network_name` (string)
+- `private_ip_google_access` (bool)
+- `compute_network` (string)
+
+**Outputs:**
+- (add any outputs if available)
+
+---
 
 ### 10. google_gke_cluster
 
@@ -178,6 +303,7 @@ module "gke_cluster" {
   subnetwork = var.subnetwork
 }
 ```
+
 **Inputs:**
 - `name` (string): Cluster name
 - `location` (string): GCP region or zone
@@ -189,6 +315,8 @@ module "gke_cluster" {
 - `cluster_id`
 - `endpoint`
 - `master_version`
+
+---
 
 ### 11. google_gke_nodepool
 
@@ -208,11 +336,12 @@ module "gke_nodepool" {
   preemptible  = var.preemptible
 }
 ```
+
 **Inputs:**
 - `name` (string): Node pool name
 - `location` (string): Region or zone
 - `project_id` (string): GCP project ID
-- `cluster` (string): GKE cluster id (from `google_gke_cluster`)
+- `cluster` (string): GKE cluster id (from google_gke_cluster)
 - `node_count` (number): Number of nodes
 - `machine_type` (string): Machine type for nodes
 - `labels` (map): Node labels
