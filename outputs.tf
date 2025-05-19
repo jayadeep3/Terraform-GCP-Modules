@@ -25,3 +25,15 @@ output "instance_private_name" {
 output "instance_public_name" {
   value = module.instance_public.name
 }
+output "gke_cluster_id" {
+  value = module.gke_cluster.cluster_id
+}
+output "gke_cluster_endpoint" {
+  value = module.gke_cluster.endpoint
+}
+output "gke_nodepool_id" {
+  value = module.gke_nodepool.nodepool_id
+}
+output "gke_nodepool_instance_group_urls" {
+  value = module.gke_nodepool.instance_group_urls
+}
