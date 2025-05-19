@@ -25,14 +25,36 @@ module "network" {
   routing_mode            = var.routing_mode
 }
 
-module "subnetwork" {
-  source                   = "./google_compute_subnetwork"
-  project_id               = var.project_id
-  region                   = var.region
-  compute_network_name     = var.network_name
-  name                     = var.subnetwork_name
-  subnet_cidr_range        = var.subnet_cidr_range
-  private_ip_google_access = var.private_ip_google_access
+# module "subnetwork" {
+#  source                   = "./google_compute_subnetwork"
+#  project_id               = var.project_id
+#  region                   = var.region
+#  compute_network_name     = var.network_name
+#  name                     = var.subnetwork_name
+#  subnet_cidr_range        = var.subnet_cidr_range
+#  private_ip_google_access = var.private_ip_google_access
+#}
+
+# Private Subnet (no public IPs, attached to NAT and Cloud Router)
+module "private_subnet" {
+  source                    = "./resources/google_compute_subnetwork"
+  project_id                = var.project_id
+  name                      = var.private_subnet_name
+  subnet_cidr_range         = var.private_subnet_cidr
+  region                    = var.region
+  compute_network           = module.network.network_id
+  private_ip_google_access  = true
+}
+
+# Public Subnet (can have public IPs)
+module "public_subnet" {
+  source                    = "./resources/google_compute_subnetwork"
+  project_id                = var.project_id
+  name                      = var.public_subnet_name
+  subnet_cidr_range         = var.public_subnet_cidr
+  region                    = var.region
+  compute_network           = module.network.network_id
+  private_ip_google_access  = false
 }
 
 module "firewall" {
