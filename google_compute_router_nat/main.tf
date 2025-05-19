@@ -14,5 +14,5 @@ resource "google_compute_router_nat" "nat" {
     enable = true
     filter = "ERRORS_ONLY"
   }
-  depends_on = [var.compute_router_name]
+  depends_on = [google_compute_network.vpc-network]
 }
