@@ -19,6 +19,6 @@ variable "source_subnetwork_ip_ranges_to_nat" {
   description = "Possible values are: ALL_SUBNETWORKS_ALL_IP_RANGES, ALL_SUBNETWORKS_ALL_PRIMARY_IP_RANGES, LIST_OF_SUBNETWORKS."
 }
 
-variable "subnet_id" {
-  description = "Id of the subnet"
+variable "public_subnet_name" {
+  description = "Name of the subnet"
 }
