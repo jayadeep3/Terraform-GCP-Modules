@@ -12,7 +12,6 @@ terraform {
 provider "google" {
   project = var.project_id
   region  = var.region
-  credentials = file("cloud-devops-459104-1c7af73794dd.json")
 }
 
 # Example: Using all modules, passing required variables
