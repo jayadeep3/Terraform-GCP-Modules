@@ -216,25 +216,25 @@ variable "nat_name" {
 }
 
 # GKE Cluster
-variable "cluster_name" {
-  description = "GKE cluster name"
-  type        = string
-}
+#variable "cluster_name" {
+#  description = "GKE cluster name"
+#  type        = string
+#}
 
 # GKE Nodepool
-variable "nodepool_name" {
-  description = "Node pool name"
-  type        = string
-}
-variable "node_count" {
-  description = "Number of nodes in node pool"
-  type        = number
-}
-variable "node_labels" {
-  description = "Labels for GKE node pool"
-  type        = map(string)
-}
-variable "preemptible" {
-  description = "Use preemptible VMs"
-  type        = bool
-}
+#variable "nodepool_name" {
+#  description = "Node pool name"
+#  type        = string
+#}
+#variable "node_count" {
+#  description = "Number of nodes in node pool"
+#  type        = number
+#}
+#variable "node_labels" {
+#  description = "Labels for GKE node pool"
+#  type        = map(string)
+#}
+#variable "preemptible" {
+#  description = "Use preemptible VMs"
+#  type        = bool
+#}
