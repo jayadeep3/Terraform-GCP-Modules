@@ -28,6 +28,7 @@ jobs:
   terraform-destroy:
     runs-on: ubuntu-latest
     needs: terraform
+    if: always()  # <- run even if apply fails
 
     env:
       GOOGLE_CREDENTIALS: ${{ secrets.TERRAFORM_SERVICE_ACCOUNT }}
