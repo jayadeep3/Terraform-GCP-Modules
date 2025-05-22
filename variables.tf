@@ -9,10 +9,10 @@ variable "region" {
 }
 
 # Network
-variable "network" {
-  description = "VPC network name"
-  type        = string
-}
+# variable "network" {
+#   description = "VPC network name"
+#   type        = string
+# }
 #variable "subnetwork" {
 #  description = "Subnetwork name"
 #  type        = string
@@ -77,11 +77,11 @@ variable "target_tags" {
 }
 
 # Compute disk
-variable "name" {
+variable "disk_name" {
   description = "Name (for disk, instances, etc.)"
   type        = string
 }
-variable "type" {
+variable "disk_type" {
   description = "Disk type"
   type        = string
 }
@@ -89,17 +89,21 @@ variable "zone" {
   description = "Zone for resources"
   type        = string
 }
-variable "image" {
+variable "disk_image" {
   description = "Image for disk or instance"
   type        = string
 }
-variable "size" {
+variable "disk_size" {
   description = "Size of the disk"
   type        = number
 }
-variable "labels" {
+variable "disk_labels" {
   description = "Labels for resources"
   type        = map(string)
+}
+variable "disk_size_gb" {
+  description = "Size of the disk for gke nodes"
+  type = number
 }
 
 # Compute Instance (private/public)
@@ -111,10 +115,10 @@ variable "deletion_protection" {
   description = "Enable deletion protection"
   type        = bool
 }
-variable "tags" {
-  description = "Tags for instance"
-  type        = list(string)
-}
+# variable "tags" {
+#   description = "Tags for instance"
+#   type        = list(string)
+# }
 variable "disk_auto_delete" {
   description = "Auto-delete boot disk"
   type        = bool
@@ -122,6 +126,38 @@ variable "disk_auto_delete" {
 variable "provisioning_model" {
   description = "Provisioning model"
   type        = string
+}
+variable "instance_private_name" {
+  description = "Private Instance name"
+  type = string
+}
+variable "instance_private_image" {
+  description = "Private instance for machine image"
+  type = string
+}
+variable "instance_private_labels" {
+  description = "Private Instance for labels"
+  type = map(string)
+}
+variable "instance_public_name" {
+  description = "Public Instance name"
+  type = string
+}
+variable "instance_public_image" {
+  description = "Public instance for machine image"
+  type = string
+}
+variable "instance_public_labels" {
+  description = "Public Instance for labels"
+  type = map(string)
+}
+variable "instance_private_tags" {
+  description = "Tags for private instance"
+  type        = list(string)
+}
+variable "instance_public_tags" {
+  description = "Tags for public instance"
+  type        = list(string)
 }
 variable "metadata" {
   description = "Metadata for instance"
@@ -131,28 +167,28 @@ variable "firewall_name" {
   description = "Firewall rule name"
   type        = string
 }
-variable "service_account_email" {
-  description = "Service account email"
-  type        = string
-}
-variable "subnet_name" {
-  description = "Subnet name"
-  type        = string
-}
+# variable "service_account_email" {
+#   description = "Service account email"
+#   type        = string
+# }
+# variable "subnet_name" {
+#   description = "Subnet name"
+#   type        = string
+# }
 
 # Attached Disk
-variable "disk_id" {
-  description = "Disk ID to attach"
-  type        = string
-}
-variable "compute_instance_id" {
-  description = "Compute instance ID for disk attachment"
-  type        = string
-}
-variable "instance_zone" {
-  description = "Zone of the instance for disk attachment"
-  type        = string
-}
+# variable "disk_id" {
+#   description = "Disk ID to attach"
+#   type        = string
+# }
+# variable "compute_instance_id" {
+#   description = "Compute instance ID for disk attachment"
+#   type        = map(set(string))
+# }
+# variable "instance_zone" {
+#   description = "Zone of the instance for disk attachment"
+#   type        = string
+# }
 
 # Router
 variable "compute_router_name" {
@@ -169,9 +205,14 @@ variable "source_subnetwork_ip_ranges_to_nat" {
   description = "Source subnetwork IP ranges to NAT"
   type        = string
 }
-variable "subnet_id" {
-  description = "Subnet ID for NAT"
-  type        = string
+# variable "subnet_id" {
+#   description = "Subnet ID for NAT"
+#   type        = string
+# }
+
+variable "nat_name" {
+  description = "NAT Name"
+  type = string
 }
 
 # GKE Cluster
