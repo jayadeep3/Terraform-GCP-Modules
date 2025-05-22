@@ -10,6 +10,8 @@ resource "google_container_node_pool" "default" {
     machine_type = var.machine_type
     labels       = var.labels
     preemptible  = var.preemptible
+    disk_type    = "pd-standard"        # Add this line
+    disk_size_gb = 20                   # Or set lower size like 50 GB
     oauth_scopes = [
       "https://www.googleapis.com/auth/cloud-platform",
     ]
