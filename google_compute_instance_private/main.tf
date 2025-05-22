@@ -30,7 +30,7 @@ resource "google_compute_instance" "default" {
 
   service_account {
     # Google recommends custom service accounts that have cloud-platform scope and permissions granted via IAM Roles.
-    email  = "terraform-oasys-cybernatics@oasys-cybernetics-dev.iam.gserviceaccount.com"
+    # email  = "terraform-oasys-cybernatics@oasys-cybernetics-dev.iam.gserviceaccount.com"
     scopes = ["cloud-platform"]
   }
 depends_on = [ var.firewall_name ]
