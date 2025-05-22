@@ -149,27 +149,27 @@ module "instance_public" {
   depends_on = [ module.instance_private ]
 }
 
-module "gke_cluster" {
-  source    = "./google_gke_cluster"
-  name      = var.cluster_name
-  location  = var.region
-  project_id = var.project_id
-  network   = var.compute_network_name
-  subnetwork = var.private_subnet_name
-  depends_on = [ module.instance_public ]
-}
+#module "gke_cluster" {
+#  source    = "./google_gke_cluster"
+#  name      = var.cluster_name
+#  location  = var.region
+#  project_id = var.project_id
+#  network   = var.compute_network_name
+#  subnetwork = var.private_subnet_name
+#  depends_on = [ module.instance_public ]
+#}
 
-module "gke_nodepool" {
-  source      = "./google_gke_nodepool"
-  name        = var.nodepool_name
-  location    = var.region
-  project_id  = var.project_id
-  cluster     = module.gke_cluster.cluster_id
-  node_count  = var.node_count
-  machine_type = var.machine_type
-  labels      = var.node_labels
-  preemptible = var.preemptible
-  disk_type = var.disk_type
-  disk_size_gb = var.disk_size_gb
-  depends_on = [ module.gke_cluster ]
-}
+#module "gke_nodepool" {
+#  source      = "./google_gke_nodepool"
+#  name        = var.nodepool_name
+#  location    = var.region
+#  project_id  = var.project_id
+#  cluster     = module.gke_cluster.cluster_id
+#  node_count  = var.node_count
+#  machine_type = var.machine_type
+#  labels      = var.node_labels
+#  preemptible = var.preemptible
+#  disk_type = var.disk_type
+#  disk_size_gb = var.disk_size_gb
+#  depends_on = [ module.gke_cluster ]
+#}
