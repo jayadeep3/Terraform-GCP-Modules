@@ -6,7 +6,7 @@ resource "google_compute_router_nat" "nat" {
   source_subnetwork_ip_ranges_to_nat = var.source_subnetwork_ip_ranges_to_nat
 
   subnetwork {
-    name                    = var.subnet_id
+    name                    = var.public_subnet_name
     source_ip_ranges_to_nat = ["ALL_IP_RANGES"]
   }
 
@@ -14,5 +14,5 @@ resource "google_compute_router_nat" "nat" {
     enable = true
     filter = "ERRORS_ONLY"
   }
-  depends_on = [google_compute_network.vpc-network]
+  # depends_on = [google_compute_network.vpc-network]
 }
