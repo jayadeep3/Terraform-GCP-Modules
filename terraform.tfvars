@@ -59,13 +59,13 @@ instance_public_image               = "debian-cloud/debian-11"
 instance_public_labels              = { "key" = "public"}
 
 # GKE Cluster
-cluster_name      = "my-gke-cluster"
+#cluster_name      = "my-gke-cluster"
 
 # GKE Nodepool
-nodepool_name     = "primary-node-pool"
-node_count        = 3
-node_labels       = {
-  "env" = "dev"
-}
-preemptible       = false
-disk_size_gb = 20
+#nodepool_name     = "primary-node-pool"
+#node_count        = 3
+#node_labels       = {
+#  "env" = "dev"
+#}
+#preemptible       = false
+#disk_size_gb = 20
