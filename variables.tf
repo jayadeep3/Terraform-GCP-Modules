@@ -101,10 +101,6 @@ variable "disk_labels" {
   description = "Labels for resources"
   type        = map(string)
 }
-variable "disk_size_gb" {
-  description = "Size of the disk for gke nodes"
-  type = number
-}
 
 # Compute Instance (private/public)
 variable "machine_type" {
@@ -237,4 +233,8 @@ variable "nat_name" {
 #variable "preemptible" {
 #  description = "Use preemptible VMs"
 #  type        = bool
+#}
+#variable "disk_size_gb" {
+#  description = "Size of the disk for gke nodes"
+#  type = number
 #}
